@@ -19,7 +19,14 @@ const merriweather = Merriweather({
 export const metadata: Metadata = {
   title: "Matt Atkins",
   description: "Building at the intersection of Hardware & Software",
-    generator: 'v0.dev'
+  generator: 'v0.dev',
+  alternates: {
+    types: {
+      'application/rss+xml': [
+        { url: '/rss.xml', title: 'Matt Atkins - Blog RSS Feed' }
+      ]
+    }
+  }
 }
 
 export default function RootLayout({
