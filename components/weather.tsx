@@ -13,14 +13,14 @@ import {
 } from 'lucide-react'
 
 interface WeatherData {
-  current: {
+  main: {
     temp: number
-    weather: Array<{
-      main: string
-      description: string
-      icon: string
-    }>
   }
+  weather: Array<{
+    main: string
+    description: string
+    icon: string
+  }>
 }
 
 export function Weather() {
@@ -102,9 +102,9 @@ export function Weather() {
     )
   }
 
-  const tempF = Math.round(weather.current.temp * 9/5 + 32)
-  const weatherMain = weather.current.weather[0]?.main
-  const description = weather.current.weather[0]?.description
+  const tempF = Math.round(weather.main.temp * 9/5 + 32)
+  const weatherMain = weather.weather[0]?.main
+  const description = weather.weather[0]?.description
 
   const getWeatherIcon = (weatherMain: string, description: string) => {
     const iconProps = { size: 16, className: "inline" }
