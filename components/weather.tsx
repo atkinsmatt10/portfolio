@@ -102,7 +102,7 @@ export function Weather() {
     )
   }
 
-  const tempF = Math.round((weather.current.temp - 273.15) * 9/5 + 32)
+  const tempF = Math.round(weather.current.temp * 9/5 + 32)
   const weatherMain = weather.current.weather[0]?.main
   const description = weather.current.weather[0]?.description
 

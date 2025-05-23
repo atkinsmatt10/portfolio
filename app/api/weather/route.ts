@@ -36,7 +36,7 @@ export async function GET(request: NextRequest) {
     }
     
     const response = await fetch(
-      `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,daily,alerts&appid=${apiKey}`,
+      `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,daily,alerts&appid=${apiKey}&units=metric`,
       {
         headers: {
           'Content-Type': 'application/json',
@@ -45,7 +45,9 @@ export async function GET(request: NextRequest) {
     )
 
     if (!response.ok) {
-      throw new Error(`OpenWeather API error: ${response.status}`)
+      const errorText = await response.text()
+      console.error('OpenWeather API error response:', errorText)
+      throw new Error(`OpenWeather API error: ${response.status} - ${errorText}`)
     }
 
     const data = await response.json()
