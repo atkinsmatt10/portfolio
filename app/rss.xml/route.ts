@@ -1,6 +1,6 @@
 import { getAllPosts } from '@/lib/blog'
 
-function markdownToHtml(markdown: string): string {
+export function markdownToHtml(markdown: string): string {
   return markdown
     // Convert headers
     .replace(/^# (.*$)/gm, '<h1>$1</h1>')

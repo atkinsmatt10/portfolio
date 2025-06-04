@@ -21,7 +21,7 @@ export default function Home() {
         <AnimatedSection delay={0.3}>
           <section className="mb-10">
             <p className="text-lg mb-3">
-              Principle PM @{" "}
+                Principal PM @{" "}
               <Link href="https://smartrent.com" className="hover:underline">
                 SmartRent
               </Link>
