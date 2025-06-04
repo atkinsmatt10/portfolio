@@ -16,7 +16,7 @@ Personal portfolio built with Next.js, TypeScript, and Tailwind CSS featuring sm
 - ✨ **Smooth Page Animations** - Beautiful slide-in transitions on page load using Motion.dev
 - 📱 **Responsive Design** - Mobile-first approach with Tailwind CSS
 - 📝 **MDX Blog** - Write blog posts in Markdown with React components
-- 🌤️ **Live Weather** - Real-time weather data for Philadelphia
+- 🌤️ **Live Weather** - Cached weather data for Philadelphia, refreshed every 10 minutes
 - 📊 **Analytics** - Performance tracking with Vercel Analytics
 
 ## Getting Started
