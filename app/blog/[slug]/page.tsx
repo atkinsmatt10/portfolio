@@ -5,6 +5,7 @@ import { getPostBySlug, getAllPosts } from "@/lib/blog"
 import { formatDate } from "@/lib/utils"
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
+import { TextToSpeechPlayer } from "@/components/text-to-speech-player"
 
 interface PageProps {
   params: Promise<{ slug: string }>
@@ -62,6 +63,11 @@ export default async function BlogPost({ params }: PageProps) {
         </header>
 
         <div className="border-t border-gray-200 my-8"></div>
+
+        <TextToSpeechPlayer 
+          text={post.content} 
+          title="Listen to this article"
+        />
 
         <article className="prose prose-gray max-w-none prose-headings:font-serif prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl">
           <ReactMarkdown 
