@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { markdownToHtml } from '../app/rss.xml/route'
+import { markdownToHtml } from '../lib/markdown'
 
 test('converts headers', () => {
   const md = '# Title\n## Sub'

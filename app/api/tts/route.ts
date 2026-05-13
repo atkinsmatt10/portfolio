@@ -1,6 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { ElevenLabsClient } from '@elevenlabs/elevenlabs-js'
 
+function getStatusCode(error: unknown): number | undefined {
+  if (!(error instanceof Error) || !('statusCode' in error)) {
+    return undefined
+  }
+
+  const { statusCode } = error as Error & { statusCode?: unknown }
+  return typeof statusCode === 'number' ? statusCode : undefined
+}
+
 export async function POST(request: NextRequest) {
   try {
     const { text } = await request.json()
@@ -57,10 +66,10 @@ export async function POST(request: NextRequest) {
     })
   } catch (error) {
     console.error('Error generating speech:', error)
-    
+
     // Check if it's an authentication error
-    if (error instanceof Error && 'statusCode' in error) {
-      const statusCode = (error as any).statusCode
+    const statusCode = getStatusCode(error)
+    if (statusCode) {
       if (statusCode === 401) {
         console.error('Authentication failed - API key may be invalid or expired')
         return NextResponse.json(
@@ -75,10 +84,10 @@ export async function POST(request: NextRequest) {
         )
       }
     }
-    
+
     return NextResponse.json(
       { error: 'Failed to generate speech' },
       { status: 500 }
     )
   }
-} 
+}

@@ -20,8 +20,8 @@ export default function BlogPage() {
           </Link>
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-4">
             <h1 className="font-serif text-4xl md:text-5xl font-medium">Writing</h1>
-            <Link 
-              href="/rss.xml" 
+            <Link
+              href="/rss.xml"
               className="flex items-center gap-2 text-gray-600 hover:text-gray-800 transition-colors group w-fit"
               target="_blank"
               rel="noopener noreferrer"
@@ -31,7 +31,7 @@ export default function BlogPage() {
             </Link>
           </div>
           <p className="text-xl md:text-2xl font-light">
-            Hot takes on tech, the world of sports, and a mix of other things I'm thinking about.
+            Hot takes on tech, the world of sports, and a mix of other things I&apos;m thinking about.
           </p>
         </header>
 
@@ -68,4 +68,4 @@ export default function BlogPage() {
       </main>
     </div>
   )
-} 
+}

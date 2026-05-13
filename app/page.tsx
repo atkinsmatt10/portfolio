@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { Weather } from "@/components/weather"
 import { PageTransition, AnimatedSection } from "@/components/page-transition"
-import { Mail, Linkedin, Github, Rss } from "lucide-react"
+import { BriefcaseBusiness, GitBranch, Mail, Rss } from "lucide-react"
 
 export default function Home() {
   return (
@@ -82,7 +82,7 @@ export default function Home() {
                   View all blog posts →
                 </Link>
                 <p className="mt-1 text-gray-700">
-                Hot takes on tech, the world of sports, and a mix of other things I'm thinking about.
+                Hot takes on tech, the world of sports, and a mix of other things I&apos;m thinking about.
                 </p>
               </div>
             </div>
@@ -106,14 +106,14 @@ export default function Home() {
                 className="p-2 hover:bg-gray-100 rounded-full transition-colors"
                 aria-label="LinkedIn"
               >
-                <Linkedin size={24} />
+                <BriefcaseBusiness size={24} />
               </Link>
               <Link 
                 href="https://github.com/atkinsmatt10" 
                 className="p-2 hover:bg-gray-100 rounded-full transition-colors"
                 aria-label="GitHub"
               >
-                <Github size={24} />
+                <GitBranch size={24} />
               </Link>
             </div>
           </section>
