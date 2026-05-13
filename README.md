@@ -39,11 +39,10 @@ Create `.env.local` for local API-backed features:
 ```bash
 # .env.local
 ELEVENLABS_API_KEY=your_elevenlabs_api_key_here
-OPENWEATHER_API_KEY=your_openweather_api_key_here
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
 ```
 
-`ELEVENLABS_API_KEY` enables text-to-speech narration. `OPENWEATHER_API_KEY` enables the Philadelphia weather badge. `NEXT_PUBLIC_SITE_URL` is used when generating RSS links and should be set to the production URL in Vercel.
+`ELEVENLABS_API_KEY` enables text-to-speech narration. The Philadelphia weather badge uses Open-Meteo and does not require an API key. `NEXT_PUBLIC_SITE_URL` is used when generating RSS links and should be set to the production URL in Vercel.
 
 ## Development Commands
 
