@@ -1,15 +1,15 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { 
-  Sun, 
-  Cloud, 
-  CloudRain, 
-  CloudDrizzle, 
-  CloudSnow, 
-  CloudLightning, 
+import {
+  Sun,
+  Cloud,
+  CloudRain,
+  CloudDrizzle,
+  CloudSnow,
+  CloudLightning,
   CloudFog,
-  CloudSun 
+  CloudSun
 } from 'lucide-react'
 
 interface WeatherData {
@@ -27,43 +27,36 @@ export function Weather() {
   const [weather, setWeather] = useState<WeatherData | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
-  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  useEffect(() => {
-    if (!mounted) return
-    
     const fetchWeather = async () => {
       try {
         // Philadelphia coordinates
         const lat = 39.9526
         const lon = -75.1652
-        
+
         // Check for cached data (cache for 10 minutes)
         const cacheKey = `weather-${lat}-${lon}`
         const cached = localStorage.getItem(cacheKey)
         const cacheTime = localStorage.getItem(`${cacheKey}-time`)
         const now = Date.now()
         const tenMinutes = 10 * 60 * 1000 // 10 minutes in milliseconds
-        
+
         if (cached && cacheTime && (now - parseInt(cacheTime)) < tenMinutes) {
           setWeather(JSON.parse(cached))
           setLoading(false)
           return
         }
-        
+
         const response = await fetch(`/api/weather?lat=${lat}&lon=${lon}`)
-        
+
         if (!response.ok) {
           throw new Error('Failed to fetch weather data')
         }
-        
+
         const data = await response.json()
         setWeather(data)
-        
+
         // Cache the response
         localStorage.setItem(cacheKey, JSON.stringify(data))
         localStorage.setItem(`${cacheKey}-time`, now.toString())
@@ -75,12 +68,7 @@ export function Weather() {
     }
 
     fetchWeather()
-  }, [mounted])
-
-  // Don't render anything until mounted (prevents hydration mismatch)
-  if (!mounted) {
-    return null
-  }
+  }, [])
 
   if (loading) {
     return (
@@ -108,7 +96,7 @@ export function Weather() {
 
   const getWeatherIcon = (weatherMain: string, description: string) => {
     const iconProps = { size: 16, className: "inline" }
-    
+
     switch (weatherMain?.toLowerCase()) {
       case 'clear':
         return <Sun {...iconProps} />
@@ -140,4 +128,4 @@ export function Weather() {
       {" "}• {tempF}°F {getWeatherIcon(weatherMain, description)}
     </span>
   )
-} 
+}

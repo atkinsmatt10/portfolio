@@ -4,9 +4,10 @@ Personal portfolio built with Next.js, TypeScript, and Tailwind CSS featuring sm
 
 ## Tech Stack
 
-- **Next.js 15** - React framework with App Router
+- **Next.js 16** - React framework with App Router and Turbopack builds
+- **React 19** - UI runtime
 - **TypeScript** - Type-safe development
-- **Tailwind CSS** - Utility-first styling
+- **Tailwind CSS 4** - Utility-first styling
 - **Motion.dev** - Modern React animation library for smooth page transitions
 - **MDX** - Markdown with JSX for blog content
 - **Vercel Analytics** - Performance tracking
@@ -22,6 +23,8 @@ Personal portfolio built with Next.js, TypeScript, and Tailwind CSS featuring sm
 
 ## Getting Started
 
+Requires Node.js 22 through 24 and pnpm 10. The repo includes `.tool-versions` for asdf users and a `packageManager` pin for Corepack-compatible installs.
+
 ```bash
 pnpm install
 pnpm dev
@@ -31,14 +34,27 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ### Environment Variables
 
-To enable the text-to-speech feature, add your ElevenLabs API key to your environment:
+Create `.env.local` for local API-backed features:
 
 ```bash
 # .env.local
 ELEVENLABS_API_KEY=your_elevenlabs_api_key_here
+OPENWEATHER_API_KEY=your_openweather_api_key_here
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
 ```
 
-Get your API key from [ElevenLabs](https://elevenlabs.io/docs/developer-guides/quickstart#authentication).
+`ELEVENLABS_API_KEY` enables text-to-speech narration. `OPENWEATHER_API_KEY` enables the Philadelphia weather badge. `NEXT_PUBLIC_SITE_URL` is used when generating RSS links and should be set to the production URL in Vercel.
+
+## Development Commands
+
+```bash
+pnpm lint
+pnpm typecheck
+pnpm test
+pnpm build
+```
+
+`pnpm audit` should return no known vulnerabilities before deploys.
 
 ## Animation Details
 
@@ -51,4 +67,4 @@ The site uses [Motion.dev](https://motion.dev/docs/react-animation) for elegant 
 
 Components:
 - `PageTransition` - Wraps entire page content
-- `AnimatedSection` - Individual section animations with customizable delays 
+- `AnimatedSection` - Individual section animations with customizable delays

@@ -1,14 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server'
 
+type WeatherApiResponse = Record<string, unknown>
+
 // Simple in-memory cache
-const cache = new Map<string, { data: any; timestamp: number }>()
+const cache = new Map<string, { data: WeatherApiResponse; timestamp: number }>()
 const CACHE_DURATION = 10 * 60 * 1000 // 10 minutes
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url)
   const lat = searchParams.get('lat')
   const lon = searchParams.get('lon')
-  
+
   if (!lat || !lon) {
     return NextResponse.json(
       { error: 'Latitude and longitude are required' },
@@ -17,7 +19,7 @@ export async function GET(request: NextRequest) {
   }
 
   const apiKey = process.env.OPENWEATHER_API_KEY
-  
+
   if (!apiKey) {
     return NextResponse.json(
       { error: 'OpenWeather API key not configured' },
@@ -30,11 +32,11 @@ export async function GET(request: NextRequest) {
     const cacheKey = `${lat}-${lon}`
     const cached = cache.get(cacheKey)
     const now = Date.now()
-    
+
     if (cached && (now - cached.timestamp) < CACHE_DURATION) {
       return NextResponse.json(cached.data)
     }
-    
+
     const response = await fetch(
       `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`,
       {
@@ -50,11 +52,11 @@ export async function GET(request: NextRequest) {
       throw new Error(`OpenWeather API error: ${response.status} - ${errorText}`)
     }
 
-    const data = await response.json()
-    
+    const data = await response.json() as WeatherApiResponse
+
     // Cache the response
     cache.set(cacheKey, { data, timestamp: now })
-    
+
     return NextResponse.json(data)
   } catch (error) {
     console.error('Weather API error:', error)
@@ -63,4 +65,4 @@ export async function GET(request: NextRequest) {
       { status: 500 }
     )
   }
-} 
+}
