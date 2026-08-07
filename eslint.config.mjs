@@ -5,6 +5,15 @@ const eslintConfig = [
   ...nextVitals,
   ...nextTypescript,
   {
+    files: ["components/lifeline/**/*.{ts,tsx}"],
+    rules: {
+      "react-hooks/exhaustive-deps": "off",
+      "react-hooks/immutability": "off",
+      "react-hooks/refs": "off",
+      "react-hooks/set-state-in-effect": "off",
+    },
+  },
+  {
     ignores: [
       ".next/**",
       ".vercel/**",

@@ -1,45 +1,43 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Inter, Merriweather } from "next/font/google"
-import { Analytics } from '@vercel/analytics/react'
+import { Analytics } from "@vercel/analytics/react"
+import { GeistSans } from "geist/font/sans"
+
+import { ThemeProvider } from "@/components/theme-provider"
+
 import "./globals.css"
 
-const inter = Inter({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-inter",
-})
-
-const merriweather = Merriweather({
-  weight: ["300", "400", "700"],
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-merriweather",
-})
-
 export const metadata: Metadata = {
-  title: "Matt Atkins",
-  description: "Building at the intersection of Hardware & Software",
-  generator: 'v0.dev',
+  metadataBase: new URL("https://www.mattatkins.net"),
+  title: "Matt Atkins | Product Leader",
+  description:
+    "The professional and personal timeline of Matt Atkins, a product leader building at the intersection of hardware and software.",
   alternates: {
-    types: {
-      'application/rss+xml': [
-        { url: '/rss.xml', title: 'Matt Atkins - Blog RSS Feed' }
-      ]
-    }
-  }
+    canonical: "/",
+  },
+  openGraph: {
+    title: "Matt Atkins | Product Leader",
+    description:
+      "A career timeline spanning data, connected homes, access control, and Team Nate the Great.",
+    url: "/",
+    siteName: "Matt Atkins",
+    type: "website",
+  },
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${merriweather.variable}`}>
+    <html lang="en" className={GeistSans.variable} suppressHydrationWarning>
       <body>
-        {children}
-        <Analytics />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+          <Analytics />
+        </ThemeProvider>
       </body>
     </html>
   )
